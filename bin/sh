@@ -1,0 +1,6 @@
+#!/bin/bash
+source "$PWD/bin/bash.sh"
+
+containerName="${argv[1]:="express-api"}"
+
+execute docker exec -it $containerName sh

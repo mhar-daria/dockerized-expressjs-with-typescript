@@ -1,0 +1,24 @@
+{
+    "semi": false,
+    "trailingComma": "es5",
+    "singleQuote": true,
+    "overrides": [
+        {
+            "files": [
+                "**/*.ts",
+                "**/*.js"
+            ],
+            "options": {
+                "tabWith": 2,
+                "arrowParens": "always",
+                "printWidth": 80
+            }
+        },
+        {
+            "files": "*.html",
+            "options": {
+                "jsxBracketSameLine": false
+            }
+        }
+    ]
+}

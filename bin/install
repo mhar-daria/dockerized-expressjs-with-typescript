@@ -1,0 +1,6 @@
+#!/bin/bash
+source "$PWD/bin/bash.sh"
+
+execute docker compose down && \
+        docker compose -f "$PWD/docker-compose.yml" build --no-cache && \
+        docker compose -f "$PWD/docker-compose.yml" up
