@@ -84,7 +84,7 @@ Database
 
 ### Credentials
 
-[POST] [/api/login](#pist-api-login)
+[POST] [/api/login](#post-apilogin)
 
 ### POST /api/login
 
