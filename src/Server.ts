@@ -9,6 +9,8 @@ import {
 } from '../config/cors'
 import mainRoutes from './routes'
 import { errorHandler } from './helpers/ErrorHandler'
+import _ from 'lodash'
+import './utils/LodashMixins'
 
 dotenv.config()
 

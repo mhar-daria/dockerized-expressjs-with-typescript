@@ -8,10 +8,23 @@ export const find = (
   return GroupRole.findByPk(id, options)
 }
 
+export const findByKey = (
+  key: string,
+  options: Options = {}
+): Promise<GroupRoleOutput | null> => {
+  return GroupRole.findOne({ where: { key }, ...options })
+}
+
 export const all = (
   options: Options = {}
 ): Promise<GroupRoleOutput[] | null> => {
   return GroupRole.findAll({
     attributes: ['groupRoleId', 'roles', 'name', 'key'],
   })
+}
+
+export default {
+  find,
+  all,
+  findByKey,
 }

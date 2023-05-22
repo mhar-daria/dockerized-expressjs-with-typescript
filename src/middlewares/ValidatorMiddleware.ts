@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express'
 import { ValidationChain, validationResult } from 'express-validator'
 
-export default function ValidateMiddleware(validations: ValidationChain[]) {
+export default function validator(validations: ValidationChain[]) {
   return async (req: Request, res: Response, next: NextFunction) => {
     await Promise.all(validations.map((validation) => validation.run(req)))
 

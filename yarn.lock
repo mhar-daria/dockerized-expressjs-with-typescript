@@ -1162,6 +1162,13 @@
   dependencies:
     "@types/node" "*"
 
+"@types/lodash.mixin@^4.3.7":
+  version "4.3.7"
+  resolved "https://registry.yarnpkg.com/@types/lodash.mixin/-/lodash.mixin-4.3.7.tgz#7eb1ab859e79b525682ff0d387798f30a3b801a6"
+  integrity sha512-mBK7itYAMz9I60odLIuP/+wT7DAp6ncNsUnFtqjzUIe5k2SZFP6C6LEImCM+guYc4IRwgUWcOCupNdih0chc+Q==
+  dependencies:
+    "@types/lodash" "*"
+
 "@types/lodash@*":
   version "4.14.191"
   resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.191.tgz#09511e7f7cba275acd8b419ddac8da9a6a79e2fa"

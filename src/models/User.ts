@@ -1,4 +1,9 @@
-import { Optional, Model, DataTypes } from 'sequelize'
+import {
+  Optional,
+  Model,
+  DataTypes,
+  HasManyAddAssociationMixin,
+} from 'sequelize'
 import connection from '.'
 import _ from 'lodash'
 import { authenticate } from '../helpers/auth'
@@ -6,7 +11,8 @@ import { sign } from '../helpers/JWT'
 import UserRole, { UserRoleOutput } from './UserRole'
 import GroupRole, { GroupRoleOutput } from './GroupRole'
 import GroupUser from './GroupUser'
-import { mergeCustomizer } from '../helpers/common'
+import { generatePassword, mergeCustomizer } from '../helpers/common'
+import { random } from '../helpers/common'
 
 interface UserAttributes {
   userId: number
@@ -52,6 +58,8 @@ class User extends Model<UserAttributes, UserInput> implements UserAttributes {
   public authenticate(rawPassword: string, nonce: string): boolean {
     return authenticate(rawPassword, nonce, this)
   }
+
+  public addGroupRoles!: HasManyAddAssociationMixin<GroupRole, number>
 
   /**
    * JWT Sign
@@ -122,6 +130,18 @@ User.init(
     paranoid: true,
   }
 )
+
+User.beforeCreate(async (user: User) => {
+  user.firstName = _.capitalize(user.firstName)
+  user.lastName = _.capitalize(user.lastName)
+
+  const usernameRand = random(10)
+  const { salt, password } = generatePassword(user.password)
+
+  user.salt = salt
+  user.password = password
+  user.username = `${user.email?.split('@').shift() || ''}-${usernameRand}`
+})
 
 User.hasOne(UserRole, {
   as: 'role',

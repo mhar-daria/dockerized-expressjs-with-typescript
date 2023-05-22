@@ -73,3 +73,52 @@ Database
 `password`: expresspostgres
 `port`: 5432
 `database`: express_db
+
+## Endpoints
+
+### Users
+
+[POST] [/api/<version>/users](#post-api-versions-users)
+
+[GET] [/api/<version>/users](#get-api-versions-users)
+
+### Credentials
+
+[POST] [/api/login](#pist-api-login)
+
+### POST /api/login
+
+Login to the platform
+
+**Paramters**
+
+| Name       | Required | Type   | Description                                                  |
+| ---------- | -------- | ------ | ------------------------------------------------------------ |
+| `email`    | required | string | The email used by the user when he/she sign up               |
+| `password` | required | string | The hashed password generated encrypted using AES.           |
+| `tkid`     | required | string | Key string that will be used to encrypt and decrypt password |
+
+**Password Generation**
+
+`AES.encrypt(<raw password>, <tkid>)`
+
+**Response**
+
+```
+// Valid Credentials
+
+{
+    "message": "successfully logged in",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJJZCI6IjYiLCJmaXJzdE5hbWUiOiJUZXN0IiwibGFzdE5hbWUiOiJBY2NvdW50IiwidXNlcm5hbWUiOiJ0ZXN0MTAxLWZLN0gxREVuV0giLCJwYXNzd29yZCI6ImVlMDE2NjQ0MTE5MjU0YzNjOTA3MzlmMjA5ZWRjZjYxYmJiZGY5OTE2NjdlN2MxNDEzOTlmNjkxN2QyNmNkNGQiLCJzYWx0IjoiemcyWU94dXhlWiIsImVtYWlsIjoidGVzdDEwMUBlbWFpbC5jb20iLCJjcmVhdGVkQXQiOiIyMDIzLTA1LTIyVDA2OjU1OjQ0LjUyNVoiLCJ1cGRhdGVkQXQiOiIyMDIzLTA1LTIyVDA2OjU1OjQ0LjUyNVoiLCJkZWxldGVkQXQiOm51bGx9LCJpYXQiOjE2ODQ3MzUwMTAsImRhdGUiOiIyMDIzLTA1LTIyVDA2OjU2OjUwLjU1N1oiLCJleHAiOjE2ODQ5NTEwMTB9.OoKoBqp3yRIwC3_HN4_oceonJcNED8-5oa-5m6JZotw",
+    "expiration": "2023-05-24 5:56:50",
+    "tokenType": "bearer"
+}
+
+or
+
+// Invalid Credentials
+
+{
+    "message": "Email or password is incorrect."
+}
+```

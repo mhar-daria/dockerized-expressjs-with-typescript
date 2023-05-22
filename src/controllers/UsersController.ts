@@ -29,6 +29,7 @@ export const login = (req: Request, res: Response, next: NextFunction) => {
           message: 'successfully logged in',
           token,
           expiration: moment(decoded?.exp * 1000).format('YYYY-MM-DD h:mm:ss'),
+          tokenType: 'bearer',
         })
       }
 

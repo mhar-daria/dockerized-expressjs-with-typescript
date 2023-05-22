@@ -14,4 +14,6 @@ const connection = new Sequelize(dbName, dbUser, dbPasswrod, {
   dialect,
 })
 
+export const transaction = connection.transaction
+
 export default connection

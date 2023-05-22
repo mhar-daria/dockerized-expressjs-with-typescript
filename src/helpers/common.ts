@@ -39,3 +39,14 @@ export function mergeCustomizer(value: any, newValue: any) {
     return newValue.concat(value)
   }
 }
+
+export function generatePassword(rawPassword = '') {
+  const sha256 = require('crypto-js/sha256')
+
+  const salt = random(10)
+
+  return {
+    salt,
+    password: sha256(rawPassword + '.' + salt).toString(),
+  }
+}

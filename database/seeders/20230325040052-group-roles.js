@@ -18,6 +18,14 @@ module.exports = {
           ],
         },
       },
+      {
+        groupRoleId: 2,
+        name: 'Guest',
+        key: 'guest',
+        roles: {
+          users: ['canListUserDetails', 'canGetUserDetails'],
+        },
+      },
     ]
     await queryInterface.bulkInsert(
       'GroupRoles',
