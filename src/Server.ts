@@ -43,3 +43,5 @@ app.use(errorHandler)
 app.on('ModelException', (reason) => {
   console.log('rejected')
 })
+
+export const Server = app

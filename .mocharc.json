@@ -1,0 +1,15 @@
+{
+    "extension": [
+        "ts"
+    ],
+    "reporter": "mocha-junit-reporter",
+    "timeout": "60000",
+    "recursive": true,
+    "spec": [
+        "test/**/*.spec.ts"
+    ],
+    "node-option": [
+        "experimental-specifier-resolution=node",
+        "loader=ts-node/esm"
+    ]
+}

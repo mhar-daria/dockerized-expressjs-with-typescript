@@ -82,11 +82,11 @@ Database
 
 ### Users
 
-[POST] [/api/<version>/users](#post-api-versions-users)
+[POST] [/api/{version}/users](#post-api-versions-users)
 
-[GET] [/api/<version>/users](#get-api-versions-users)
+[GET] [/api/{version}/users](#get-api-versions-users)
 
-### POST /api/login
+### `POST /api/login`
 
 Login to the platform
 
@@ -123,7 +123,7 @@ or
 }
 ```
 
-### POST /api/<version>/users
+### `POST /api/<version>/users`
 
 Used to create new users private level.
 
