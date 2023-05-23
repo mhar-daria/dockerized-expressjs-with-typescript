@@ -76,15 +76,15 @@ Database
 
 ## Endpoints
 
+### Credentials
+
+[POST] [/api/login](#post-apilogin)
+
 ### Users
 
 [POST] [/api/<version>/users](#post-api-versions-users)
 
 [GET] [/api/<version>/users](#get-api-versions-users)
-
-### Credentials
-
-[POST] [/api/login](#post-apilogin)
 
 ### POST /api/login
 
@@ -122,3 +122,23 @@ or
     "message": "Email or password is incorrect."
 }
 ```
+
+### POST /api/<version>/users
+
+Used to create new users private level.
+
+**Permissions**
+
+`canCreateUsers`
+
+**Parameters**
+
+| Name        | Required | Type   | Description                      |
+| ----------- | -------- | ------ | -------------------------------- |
+| `email`     | required | string | Email of the user <br /> `email` |
+| `firstName` | required | string | First name of the user           |
+| `lastName`  | required | string | Last name of the user            |
+
+The email will be used as a default password.
+
+Username will be crerated using email splitting `@` and add unique identifier.
