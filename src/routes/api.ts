@@ -21,7 +21,7 @@ router.get('/', (req, res) => {
   return res.send({ message: 'You are not allowed here.' })
 })
 
-router.post('/login', loginValidation, login)
+router.post('/login', ValidateMiddleware(loginValidation), login)
 router.post('/verify-token/:token', verifyToken)
 router.get('/test', (req, res) => {
   return res.send({ ipAddress: getIpAddress(req) })

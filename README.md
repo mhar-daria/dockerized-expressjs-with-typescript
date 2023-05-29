@@ -142,3 +142,17 @@ Used to create new users private level.
 The email will be used as a default password.
 
 Username will be crerated using email splitting `@` and add unique identifier.
+
+## Running Tests
+
+To run tests, run the following command
+
+```bash
+  // from inside the container
+  yarn test
+
+  or
+
+  bin/sh yarn test
+
+```

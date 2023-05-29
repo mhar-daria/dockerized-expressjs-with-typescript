@@ -2,5 +2,11 @@
 source "$PWD/bin/bash.sh"
 
 containerName="${argv[1]:="express-api"}"
+arg="$@"
 
-execute docker exec -it $containerName sh
+if [ -z "$@" ]
+then
+  docker exec -it $containerName sh
+else
+  docker exec -it $containerName $arg
+fi

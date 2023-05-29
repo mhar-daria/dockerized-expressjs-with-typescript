@@ -1,3 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="Mocha Tests" time="0.010" tests="0" failures="0">
+<testsuites name="Mocha Tests" time="0.904" tests="5" failures="1">
+  <testsuite name="Root Suite" timestamp="2023-05-29T05:05:25" tests="0" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Testing POST /api/login endpoint" timestamp="2023-05-29T05:05:25" tests="3" file="/home/node/app/test/auth.spec.ts" time="0.521" failures="0">
+    <testcase name="Testing POST /api/login endpoint respond with validation failed" time="0.066" classname="respond with validation failed">
+    </testcase>
+    <testcase name="Testing POST /api/login endpoint respond with incorrect credentials" time="0.007" classname="respond with incorrect credentials">
+    </testcase>
+    <testcase name="Testing POST /api/login endpoint respond with credentials" time="0.004" classname="respond with credentials">
+    </testcase>
+  </testsuite>
+  <testsuite name="Testing POST /api/&lt;version&gt;/users endpoint" timestamp="2023-05-29T05:05:26" tests="2" file="/home/node/app/test/users.spec.ts" time="0.376" failures="1">
+    <testcase name="Testing POST /api/&lt;version&gt;/users endpoint respond an unauthorized error" time="0.004" classname="respond an unauthorized error">
+    </testcase>
+    <testcase name="Testing POST /api/&lt;version&gt;/users endpoint respond with firstName is required" time="0.006" classname="respond with firstName is required">
+    </testcase>
+    <testcase name="Testing POST /api/&lt;version&gt;/users endpoint respond with firstName is required" time="0.006" classname="respond with firstName is required">
+      <failure message="[2mexpect([22m[31mreceived[39m[2m).[22mtoHaveProperty[2m([22m[32mpath[39m[2m)[22m
+
+Expected path: [32m&quot;errors&quot;[39m
+Received path: [31m[][39m
+
+Received value: [31m{&quot;code&quot;: 401, &quot;message&quot;: &quot;Unauthorized&quot;}[39m" type="Error"><![CDATA[Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoHaveProperty[2m([22m[32mpath[39m[2m)[22m
+
+Expected path: [32m"errors"[39m
+Received path: [31m[][39m
+
+Received value: [31m{"code": 401, "message": "Unauthorized"}[39m
+    at Test.<anonymous> (/home/node/app/test/users.spec.ts:32:26)
+    at Test.assert (/home/node/app/node_modules/supertest/lib/test.js:172:8)
+    at Server.localAssert (/home/node/app/node_modules/supertest/lib/test.js:120:14)
+    at Object.onceWrapper (node:events:627:28)
+    at Server.emit (node:events:513:28)
+    at Server.emit (node:domain:489:12)
+    at emitCloseNT (node:net:2166:8)
+    at processTicksAndRejections (node:internal/process/task_queues:81:21)]]></failure>
+    </testcase>
+  </testsuite>
 </testsuites>

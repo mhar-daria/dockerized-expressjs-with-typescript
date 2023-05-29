@@ -12,16 +12,15 @@ import { errorHandler } from './helpers/ErrorHandler'
 import _ from 'lodash'
 import './utils/LodashMixins'
 
-dotenv.config()
+dotenv.config({ path: __dirname + '/../../.env' })
 
 const app: Express = express()
-const port = 9001
 
 app.get('/', (req: Request, res: Response) => {
   res.send('express + typescript')
 })
 
-app.listen(port, () => {
+app.listen(process.env.PORT, () => {
   console.log(
     `[server]: Server is running at ${process.env.HOST}:${process.env.PORT}`
   )
@@ -44,4 +43,4 @@ app.on('ModelException', (reason) => {
   console.log('rejected')
 })
 
-export const Server = app
+export default app

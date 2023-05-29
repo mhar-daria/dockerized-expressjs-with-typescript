@@ -2,7 +2,7 @@
     "extension": [
         "ts"
     ],
-    "reporter": "mocha-junit-reporter",
+    "reporter": "list",
     "timeout": "60000",
     "recursive": true,
     "spec": [
@@ -11,5 +11,11 @@
     "node-option": [
         "experimental-specifier-resolution=node",
         "loader=ts-node/esm"
-    ]
+    ],
+    "require": [
+        "./test/hooks.ts"
+    ],
+    "fullTrace": true,
+    "bail": true,
+    "exit": true
 }

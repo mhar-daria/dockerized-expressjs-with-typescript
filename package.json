@@ -10,6 +10,7 @@
   "author": "Mhar Christian Daria",
   "license": "ISC",
   "dependencies": {
+    "@types/mocha": "^10.0.1",
     "body-parser": "^1.20.1",
     "cors": "^2.8.5",
     "crypto-js": "^4.1.1",
@@ -38,7 +39,6 @@
     "@faker-js/faker": "^7.6.0",
     "@types/cors": "^2.8.13",
     "@types/crypto-js": "^4.1.1",
-    "@types/expect": "^24.3.0",
     "@types/express": "^4.17.15",
     "@types/jsonwebtoken": "^9.0.0",
     "@types/lodash.mixin": "^4.3.7",
