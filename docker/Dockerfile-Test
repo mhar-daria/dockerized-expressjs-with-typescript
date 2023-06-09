@@ -1,0 +1,17 @@
+FROM node:19-alpine
+
+WORKDIR /home/node/app
+
+COPY . /home/node/app/
+
+COPY ./.env.test /home/node/app/.env
+
+RUN yarn sequelize db:drop
+
+RUN yarn sequelize db:create
+
+RUN yarn sequelize db:migrate
+
+RUN yarn sequelize db:seed:all
+
+CMD yarn install && yarn test

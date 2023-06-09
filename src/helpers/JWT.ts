@@ -5,7 +5,7 @@ import { verifyTokenParams, verifyTokenResponse } from '../types/JWT'
 import passport from 'passport'
 import bearerStrategy from 'passport-http-bearer'
 import { isEmpty } from 'lodash'
-import * as UserRepository from '../repositories/UserRepository'
+import UserRepository from '../repositories/UserRepository'
 import { decode } from 'punycode'
 import UserRole from '../models/UserRole'
 import Role from '../models/Role'
@@ -55,6 +55,7 @@ passport.use(
           },
         ],
       })
+
       return done(null, user, { scope: 'all' })
     }
   )

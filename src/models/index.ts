@@ -1,10 +1,11 @@
 import { Dialect, Sequelize } from 'sequelize'
-import { loadEnv } from '../helpers/common'
 import dotenv from 'dotenv'
-import { dirname } from 'path'
 
 // loadEnv()
 dotenv.config({ path: __dirname + '/../../.env' })
+
+console.log('Loaded configuration file "' + __dirname + '/../../.env' + '".')
+console.log('Environment "' + process.env.NODE_ENV + '".')
 
 const dbName: string = process.env.POSTGRES_DB || 'express'
 const dbUser: string = process.env.POSTGRES_USER || 'express_user'
@@ -16,7 +17,5 @@ const connection = new Sequelize(dbName, dbUser, dbPasswrod, {
   host,
   dialect,
 })
-
-export const transaction = connection.transaction
 
 export default connection

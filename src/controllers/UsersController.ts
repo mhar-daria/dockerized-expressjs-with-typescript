@@ -1,14 +1,14 @@
 import { NextFunction, Request, Response } from 'express'
 import { verifyToken as verifyTokenHelper } from '../helpers/JWT'
 import { AuthException, ModelException } from '../utils/ErrorException'
-import * as UserRepository from '../repositories/UserRepository'
+import UserRepository from '../repositories/UserRepository'
 import jwt from 'jsonwebtoken'
 import moment from 'moment'
 
 export const login = (req: Request, res: Response, next: NextFunction) => {
   const email = req.body.email
 
-  return UserRepository.findByEmail(email)
+  return UserRepository.findByEmail(email, true)
     .then((user) => {
       if (!user) {
         return res

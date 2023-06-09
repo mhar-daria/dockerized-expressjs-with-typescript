@@ -13,8 +13,9 @@ import GroupRole, { GroupRoleOutput } from './GroupRole'
 import GroupUser from './GroupUser'
 import { generatePassword, mergeCustomizer } from '../helpers/common'
 import { random } from '../helpers/common'
+import GroupRroleRepository from '../repositories/GroupRroleRepository'
 
-interface UserAttributes {
+export interface UserAttributes {
   userId: number
   firstName: string
   lastName: string
@@ -128,6 +129,11 @@ User.init(
     modelName: 'User',
     timestamps: true,
     paranoid: true,
+    defaultScope: {
+      attributes: {
+        exclude: ['password', 'salt'],
+      },
+    },
   }
 )
 
@@ -143,6 +149,15 @@ User.beforeCreate(async (user: User) => {
   user.username = `${user.email?.split('@').shift() || ''}-${usernameRand}`
 })
 
+User.afterDestroy(async (user: User) => {
+  user.groupRoles
+  await GroupRroleRepository.destroy({
+    where: {
+      userId: user.userId,
+    },
+  })
+})
+
 User.hasOne(UserRole, {
   as: 'role',
   sourceKey: 'userId',
@@ -154,6 +169,8 @@ User.belongsToMany(GroupRole, {
   as: 'groupRoles',
   foreignKey: 'userId',
   otherKey: 'groupRoleId',
+  onDelete: 'cascade',
+  hooks: true,
 })
 
 export default User

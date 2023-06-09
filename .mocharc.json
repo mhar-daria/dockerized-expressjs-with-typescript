@@ -17,5 +17,6 @@
     ],
     "fullTrace": true,
     "bail": true,
-    "exit": true
+    "exit": true,
+    "color": true
 }

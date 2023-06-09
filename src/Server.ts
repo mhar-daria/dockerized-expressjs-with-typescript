@@ -39,8 +39,4 @@ app.use(bodyParser.json())
 mainRoutes(app)
 app.use(errorHandler)
 
-app.on('ModelException', (reason) => {
-  console.log('rejected')
-})
-
 export default app

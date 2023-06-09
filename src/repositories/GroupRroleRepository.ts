@@ -1,3 +1,4 @@
+import { DestroyOptions } from 'sequelize'
 import GroupRole, { GroupRoleInput, GroupRoleOutput } from '../models/GroupRole'
 import { Options } from '../types/sequelize'
 
@@ -23,8 +24,13 @@ export const all = (
   })
 }
 
+export const destroy = (options: DestroyOptions): Promise<number> => {
+  return GroupRole.destroy(options)
+}
+
 export default {
   find,
   all,
   findByKey,
+  destroy,
 }

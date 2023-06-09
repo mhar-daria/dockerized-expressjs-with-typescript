@@ -15,22 +15,19 @@ export const mochaHooks = (): Mocha.RootHookObject => {
       global.agent = agent
     },
     afterEach(this: Mocha.Context) {},
-    beforeAll(this: Mocha.Context) {
+    async beforeAll(this: Mocha.Context) {
       const { hash: password, nonce: tkid } = hashedPassword('password')
 
-      global.agent
-        .post('/api/login')
-        .send({
-          email: 'dev-account@express.com',
-          password,
-          tkid,
-        })
-        .end((err, res) => {
-          global.credentials = {
-            token: res.body.token,
-            tokenType: res.body.tokenType,
-          }
-        })
+      const response = await global.agent.post('/api/login').send({
+        email: 'dev-account@express.com',
+        password,
+        tkid,
+      })
+
+      global.credentials = {
+        token: response.body.token,
+        tokenType: response.body.tokenType,
+      }
     },
   }
 }

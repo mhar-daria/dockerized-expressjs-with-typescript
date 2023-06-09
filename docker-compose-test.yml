@@ -1,0 +1,21 @@
+version: '3.9'
+
+services:
+  test:
+    build:
+      dockerfile: docker\Dockerfile-Test
+      context: .
+    networks:
+      - express
+    container_name: express-api-test
+    volumes:
+      - .:/home/node/app
+    depends_on:
+      - api
+
+networks:
+  express:
+    driver: bridge
+
+volumes:
+  database:

@@ -19,6 +19,17 @@ router
     ValidatorMiddleware(CreateUserValidaiton),
     Controllers.users.createUser
   )
-router.delete('/users/:userId', authBearer(), Controllers.users.deleteUser)
+router.get(
+  '/users/:userId',
+  authBearer(),
+  RbacMiddleware('get user details'),
+  Controllers.users.getUser
+)
+router.delete(
+  '/users/:userId',
+  authBearer(),
+  RbacMiddleware('delete users'),
+  Controllers.users.deleteUser
+)
 
 export default router

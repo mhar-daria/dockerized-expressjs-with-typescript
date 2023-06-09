@@ -1,0 +1,12 @@
+#!/bin/bash
+source "$PWD/bin/bash.sh"
+
+environment="${argv[1]:=""}"
+composeFile="docker-compose.yml"
+if [ "$environment" != "" ]
+then
+    composeFile="docker-compose-$environment.yml"
+fi
+
+docker compose -f $composeFile build && \
+docker compose -f $composeFile up

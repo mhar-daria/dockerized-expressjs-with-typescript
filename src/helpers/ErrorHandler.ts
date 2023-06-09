@@ -5,7 +5,6 @@ import {
   ErrorException,
   ModelException,
 } from '../utils/ErrorException'
-import { AuthenticationError } from 'passport/lib/errors/authenticationerror'
 
 export function errorHandler(
   err: ErrorExceptions,
@@ -19,7 +18,7 @@ export function errorHandler(
     data: [],
     errors: [],
   }
-  console.log(err)
+
   if (err instanceof AuthException) {
     response = err.response
   }
