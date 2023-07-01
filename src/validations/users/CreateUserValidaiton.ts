@@ -1,6 +1,7 @@
 import { checkSchema } from 'express-validator'
-import { findByEmail } from '../../repositories/UserRepository'
+import UserRepository from '../../repositories/UserRepository'
 import * as _ from 'lodash'
+import User from '../../models/User'
 
 export default checkSchema({
   email: {
@@ -14,7 +15,7 @@ export default checkSchema({
     custom: {
       errorMessage: 'Email already exists.',
       options: (value, { req, location, path }) => {
-        return findByEmail(value).then((user) => {
+        return UserRepository.findByEmail(value).then((user) => {
           if (user) {
             return Promise.reject('E-mail already in use.')
           }

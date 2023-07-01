@@ -1,9 +1,10 @@
 import { NextFunction, Request, Response } from 'express'
 import { verifyToken as verifyTokenHelper } from '../helpers/JWT'
-import { AuthException, ModelException } from '../utils/ErrorException'
+import { AuthException } from '../utils/ErrorException'
 import UserRepository from '../repositories/UserRepository'
-import jwt from 'jsonwebtoken'
+import jwt, { JwtPayload } from 'jsonwebtoken'
 import moment from 'moment'
+import { unixTimestamp } from '../helpers/common'
 
 export const login = (req: Request, res: Response, next: NextFunction) => {
   const email = req.body.email
@@ -18,12 +19,14 @@ export const login = (req: Request, res: Response, next: NextFunction) => {
 
       if (user.authenticate(req.body.password, req.body.tkid)) {
         const token = user.sign()
-        const decoded = jwt.decode(token, { complete: true })?.payload
+        const decoded = jwt.decode(token, { complete: true }) as JwtPayload
 
         return res.status(200).send({
           message: 'successfully logged in',
           token,
-          expiration: moment(decoded?.exp * 1000).format('YYYY-MM-DD h:mm:ss'),
+          expiration: moment(decoded?.exp ?? unixTimestamp() * 1000).format(
+            'YYYY-MM-DD h:mm:ss'
+          ),
           tokenType: 'bearer',
         })
       }

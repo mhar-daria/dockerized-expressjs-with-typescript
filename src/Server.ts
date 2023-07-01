@@ -10,11 +10,13 @@ import {
 import mainRoutes from './routes'
 import { errorHandler } from './helpers/ErrorHandler'
 import _ from 'lodash'
-import './utils/LodashMixins'
+import LoggerMiddleware from './middlewares/LoggerMiddleware'
 
 dotenv.config({ path: __dirname + '/../../.env' })
 
 const app: Express = express()
+
+app.use(LoggerMiddleware)
 
 app.get('/', (req: Request, res: Response) => {
   res.send('express + typescript')
@@ -40,3 +42,5 @@ mainRoutes(app)
 app.use(errorHandler)
 
 export default app
+
+// module.exports = app

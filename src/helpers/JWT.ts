@@ -1,14 +1,12 @@
 import { Request, Response } from 'express'
 import JWT, { JsonWebTokenError, JwtPayload, VerifyErrors } from 'jsonwebtoken'
-import { JWT_LEEWAY, JWT_SECRET, JWT_EXPIRATION } from '../../config/JWT'
+import { JWT_LEEWAY, JWT_SECRET, JWT_EXPIRATION } from '../../config/jwt'
 import { verifyTokenParams, verifyTokenResponse } from '../types/JWT'
 import passport from 'passport'
-import bearerStrategy from 'passport-http-bearer'
+import { Strategy } from 'passport-http-bearer'
 import { isEmpty } from 'lodash'
 import UserRepository from '../repositories/UserRepository'
-import { decode } from 'punycode'
 import UserRole from '../models/UserRole'
-import Role from '../models/Role'
 import GroupRole from '../models/GroupRole'
 
 export function sign(payload: any) {
@@ -37,7 +35,7 @@ export function verifyToken({ token }: verifyTokenParams): verifyTokenResponse {
 }
 
 passport.use(
-  new bearerStrategy(
+  new Strategy(
     { passReqToCallback: true },
     async (req: Request, token: string, done: Function) => {
       const { decoded } = verifyToken({ token })

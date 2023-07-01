@@ -5,13 +5,15 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Docker",
       "type": "node",
       "request": "attach",
+      "name": "Attach to Docker",
+      "address": "0.0.0.0", // Docker container IP address
       "port": 9002,
-      "restart": true,
       "localRoot": "${workspaceFolder}",
-      "remoteRoot": "/home/node/app"
+      "remoteRoot": "/home/node/app",
+      "restart": true,
+      "sourceMaps": true
     }
   ]
 }

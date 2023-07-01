@@ -156,3 +156,11 @@ To run tests, run the following command
   bin/sh yarn test
 
 ```
+
+## Features
+
+- Endpoint Versioning
+- JWT authentication
+- Testing
+- Commands
+- Request and Response Logging

@@ -1,0 +1,29 @@
+FROM node:19-alpine as builder
+
+WORKDIR /home/node/app
+COPY . /home/node/app/
+EXPOSE 9001
+
+RUN yarn install
+RUN yarn build
+
+# Production Stage
+
+FROM node:19-alpine as prod
+WORKDIR /home/node/app
+
+COPY package.json .
+COPY tsconfig.json .
+COPY nodemon.json .
+COPY .env.production .
+
+RUN yarn install
+COPY --from=builder /home/node/app/dist/ .
+
+# RUN yarn global add pm2 ts-node
+# RUN yarn global add nodemon ts-node
+# RUN ln -s /usr/local/share/.config/yarn/global/node_modules/ts-node /usr/local/share/.config/yarn/global/node_modules/pm2/node_modules/.bin/
+
+EXPOSE 9009
+
+CMD yarn start:production

@@ -23,7 +23,7 @@ class UserRole
 {
   public userId!: number
   public userRoleId!: number
-  public roles!: object
+  public roles!: { [ket: string]: string[] }
   public createdAt!: Date
   public updatedAt!: Date
   public deletedAt!: Date

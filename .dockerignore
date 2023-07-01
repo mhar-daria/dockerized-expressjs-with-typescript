@@ -1,4 +1,3 @@
-
 .env
 
 .sequelizerc
@@ -7,3 +6,6 @@ README.md
 
 .gitignore
 
+test-results.xml
+
+yarn-error.log

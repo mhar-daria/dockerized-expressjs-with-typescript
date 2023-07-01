@@ -1,4 +1,4 @@
-import _ from 'lodash'
+import _ from './../utils/LodashMixins'
 import User from '../models/User'
 import UserRole from '../models/UserRole'
 import { NextFunction, Request, Response } from 'express'
@@ -11,8 +11,8 @@ type UserType = typeof User & {
 type RequestType = Request & { user?: UserType | null }
 
 export default function canAccess(string: string) {
-  return async (req: RequestType, res: Response, next: NextFunction) => {
-    const user: UserType | null | undefined = req.user
+  return (req: Request, res: Response, next: NextFunction) => {
+    const user = req.user as User
     const { permissions } = user || {}
     const pascalString = `can${_.pascalCase(string)}`
 
@@ -26,6 +26,7 @@ export default function canAccess(string: string) {
       message: "You don't have permission to access the page.",
       code: 401,
       errors: [],
+      test: 'sample',
     })
   }
 }

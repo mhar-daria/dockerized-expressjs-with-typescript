@@ -50,3 +50,7 @@ export function generatePassword(rawPassword = '') {
     password: sha256(rawPassword + '.' + salt).toString(),
   }
 }
+
+export function unixTimestamp(): number {
+  return Math.floor(Date.now() / 1000)
+}

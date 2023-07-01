@@ -18,7 +18,7 @@ import { hashedPassword } from '../helpers/auth'
 const router = express.Router()
 
 router.get('/', (req, res) => {
-  return res.send({ message: 'You are not allowed here.' })
+  return res.send({ message: 'You are not allowed here. testing' })
 })
 
 router.post('/login', ValidateMiddleware(loginValidation), login)
@@ -46,20 +46,13 @@ router.get('/getAllRole', authBearer(), (req: Request, res: Response) => {
   })
 })
 
-type roleReqTypes = Request & {
-  user?: typeof User & {
-    role?: typeof UserRole
-    groupRoles?: GroupRoleOutput[]
-    permissions?: { [key: string]: string[] }
-  }
-}
-router.get('/roles', authBearer(), (req: roleReqTypes, res: Response) => {
-  const { user } = req
+router.get('/roles', authBearer(), (req: Request, res: Response) => {
+  const user = req.user as User
 
   const role = user?.role
   const groupRoles = user?.groupRoles
   const permissions = user?.permissions
-  return res.send({ user, role, permissions })
+  return res.send({ user, role, permissions, groupRoles })
 })
 
 export default router

@@ -1,0 +1,7 @@
+{
+    "ext": "d.ts,ts,json,js",
+    "exec": "ts-node src/Server.js",
+    "execMap": {
+        "ts": "ts-node"
+    }
+}

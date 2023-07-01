@@ -8,9 +8,7 @@ export const find = (
   return UserRole.findByPk(id, options)
 }
 
-export const all = (
-  options: Options Findoptions = {}
-): Promise<UserRole[] | null> => {
+export const all = (options: Options = {}): Promise<UserRole[] | null> => {
   return UserRole.findAll({
     attributes: ['userRoleId', 'userId', 'roles'],
   })

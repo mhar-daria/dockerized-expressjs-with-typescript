@@ -2,10 +2,14 @@
   "name": "pisara-api",
   "version": "1.0.0",
   "description": "Pisara API",
-  "main": "index.js",
+  "main": "src/Server.ts",
+  "types": "src/Server.ts",
   "scripts": {
     "test": "mocha",
-    "start": "nodemon --inspect=0.0.0.0:9002 --nolazy -L -e ts,json --exec babel-node src/Server.ts --extensions .ts"
+    "start": "ts-node-dev --respawn --inspect=0.0.0.0:9002 --debug --poll --transpile-only --exit-child --watch src,commands,test -- src/Server.ts",
+    "start:production": "nodemon",
+    "copy-files": "copyfiles -u 1 'public/**/*' 'dist/public/'",
+    "build": "tsc -p .&& yarn copy-files"
   },
   "author": "Mhar Christian Daria",
   "license": "ISC",
@@ -13,6 +17,7 @@
     "@types/mocha": "^10.0.1",
     "body-parser": "^1.20.1",
     "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
     "crypto-js": "^4.1.1",
     "debug": "^4.3.4",
     "dotenv": "^16.0.3",
@@ -20,14 +25,15 @@
     "express-validator": "^6.14.2",
     "global": "^4.4.0",
     "jsonwebtoken": "^8.5.1",
+    "minimist": "^1.2.8",
     "mocha": "^10.2.0",
     "moment": "^2.29.4",
+    "morgan": "^1.10.0",
     "passport": "^0.6.0",
     "passport-http-bearer": "^1.0.1",
     "pg": "^8.8.0",
     "sequelize": "^6.28.0",
-    "sqlite3": "^5.1.4",
-    "ts-node": "^10.9.1"
+    "sqlite3": "^5.1.4"
   },
   "devDependencies": {
     "@babel/cli": "^7.19.3",
@@ -41,15 +47,27 @@
     "@types/crypto-js": "^4.1.1",
     "@types/express": "^4.17.15",
     "@types/jsonwebtoken": "^9.0.0",
+    "@types/lodash": "^4.14.195",
     "@types/lodash.mixin": "^4.3.7",
+    "@types/minimist": "^1.2.2",
+    "@types/moment": "^2.13.0",
+    "@types/morgan": "^1.9.4",
     "@types/node": "^18.11.15",
+    "@types/passport": "^1.0.12",
+    "@types/passport-http-bearer": "^1.0.37",
     "@types/sequelize": "^4.28.14",
     "@types/supertest": "^2.0.12",
+    "copyfiles": "^2.4.1",
     "expect": "^29.5.0",
     "mocha-junit-reporter": "^2.2.0",
-    "nodemon": "^2.0.20",
+    "nodemon": "^2.0.22",
     "sequelize-cli": "^6.5.2",
     "supertest": "^6.3.3",
+    "ts-node": "^10.9.1",
+    "ts-node-dev": "^2.0.0",
     "typescript": "^4.9.4"
+  },
+  "bin": {
+    "sample": "./src/commands/Sample.js"
   }
 }

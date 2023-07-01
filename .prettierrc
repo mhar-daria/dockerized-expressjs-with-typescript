@@ -19,6 +19,12 @@
             "options": {
                 "jsxBracketSameLine": false
             }
+        },
+        {
+            "files": "*.json",
+            "options": {
+                "singleQuote": false
+            }
         }
     ]
 }
