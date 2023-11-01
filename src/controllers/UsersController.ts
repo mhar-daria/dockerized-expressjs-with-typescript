@@ -12,28 +12,28 @@ export const login = (req: Request, res: Response, next: NextFunction) => {
   return UserRepository.findByEmail(email, true)
     .then((user) => {
       if (!user) {
-        return res
-          .status(400)
-          .send({ message: 'Email or password is incorrect.' })
+        res.status(400).send({ message: 'Email or password is incorrect.' })
+
+        return
       }
 
       if (user.authenticate(req.body.password, req.body.tkid)) {
         const token = user.sign()
+
         const decoded = jwt.decode(token, { complete: true }) as JwtPayload
 
-        return res.status(200).send({
+        res.status(200).send({
           message: 'successfully logged in',
           token,
-          expiration: moment(decoded?.exp ?? unixTimestamp() * 1000).format(
-            'YYYY-MM-DD h:mm:ss'
-          ),
+          expiration: moment(
+            (decoded?.payload?.exp ?? unixTimestamp()) * 1000
+          ).format('YYYY-MM-DD hh:mm:ss'),
           tokenType: 'bearer',
         })
+        return
       }
 
-      return res
-        .status(400)
-        .send({ message: 'Email or password is incorrect.' })
+      res.status(400).send({ message: 'Email or password is incorrect.' })
     })
     .catch(next)
 }

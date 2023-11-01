@@ -5,7 +5,7 @@
   "main": "src/Server.ts",
   "types": "src/Server.ts",
   "scripts": {
-    "test": "mocha",
+    "test": "cross-env LOAD_ENV=test mocha",
     "start": "ts-node-dev --respawn --inspect=0.0.0.0:9002 --debug --poll --transpile-only --exit-child --watch src,commands,test -- src/Server.ts",
     "start:production": "nodemon",
     "copy-files": "copyfiles -u 1 'public/**/*' 'dist/public/'",

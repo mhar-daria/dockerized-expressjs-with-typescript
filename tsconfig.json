@@ -116,7 +116,13 @@
     "skipDefaultLibCheck": true /* Skip type checking .d.ts files that are included with TypeScript. */,
     "skipLibCheck": false /* Skip type checking all .d.ts files. */
   },
-  "include": ["src", "commands", "config", "migrations"],
+  "include": [
+    "src",
+    "commands",
+    "config",
+    "migrations",
+    "src/modules/express.d.ts"
+  ],
   "exclude": ["node_modules", "./dist/**"],
   "extension": [".d.ts", ".ts", ".spec.ts", ".js"]
 }

@@ -14,7 +14,7 @@ export const mochaHooks = (): Mocha.RootHookObject => {
       global.server = server
       global.agent = agent
     },
-    afterEach(this: Mocha.Context) {},
+    // afterEach(this: Mocha.Context) {},
     async beforeAll(this: Mocha.Context) {
       const { hash: password, nonce: tkid } = hashedPassword('password')
 

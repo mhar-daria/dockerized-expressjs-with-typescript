@@ -2,6 +2,7 @@
     "semi": false,
     "trailingComma": "es5",
     "singleQuote": true,
+    "tabWidth": 2,
     "overrides": [
         {
             "files": [
@@ -9,9 +10,10 @@
                 "**/*.js"
             ],
             "options": {
-                "tabWith": 2,
+                "tabWidth": 2,
                 "arrowParens": "always",
-                "printWidth": 80
+                "printWidth": 80,
+                "singleQuote": true
             }
         },
         {

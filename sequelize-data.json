@@ -4,5 +4,7 @@
   "20230325040052-group-roles.js",
   "20230408152254-group-users-seeder.js",
   "20230326070341-user-roles.js",
-  "20230515062840-guest-group-roles.js"
+  "20230515062840-guest-group-roles.js",
+  "20230712023607-intial-items.js",
+  "20230720074610-products.js"
 ]

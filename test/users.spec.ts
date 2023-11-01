@@ -5,6 +5,7 @@ import expect from 'expect'
 import { mochaHooks } from './hooks'
 import User from '../src/models/User'
 import { response } from 'express'
+import { random } from 'lodash'
 
 // const server = request.agent('http://localhost:9001')
 describe('Testing POST /api/<version>/users endpoint', () => {
@@ -82,7 +83,8 @@ describe('Testing POST /api/<version>/users endpoint', () => {
       })
   })
 
-  it('should created new users', (done) => {
+  it('should created new users', async () => {
+    const rand = random(2)
     request(server)
       .post('/api/20221219/users')
       .set(
@@ -92,11 +94,10 @@ describe('Testing POST /api/<version>/users endpoint', () => {
       .send({
         lastName: 'Doe',
         firstName: 'Jane',
-        email: 'jane.doe@email.com',
+        email: `jane.doe${rand}@email.com`,
       })
       .expect(201)
       .end((err, response) => {
-        if (err) done(err)
         expect(response.status).toEqual(201)
         expect(response.text).toEqual('Created')
       })

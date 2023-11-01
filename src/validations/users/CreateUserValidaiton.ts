@@ -33,12 +33,4 @@ export default checkSchema({
       errorMessage: 'Last name is required',
     },
   },
-  //   password: {
-  //     matches: {
-  //       errorMessage:
-  //         'Password should be atleast 8 characters, has atleast 1 number, has atleast 1 uppercase value',
-  //       options:
-  //         /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/i,
-  //     },
-  //   },
 })

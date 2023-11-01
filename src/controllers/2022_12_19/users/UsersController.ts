@@ -5,22 +5,22 @@ import UserRepository from '../../../repositories/UserRepository'
 import _ from 'lodash'
 import { UserOutput } from '../../../models/User'
 
-async function createUser(req: Request, res: Response): Promise<HttpResponse> {
+async function createUser(req: Request, res: Response) {
   const payload = req.body
 
   const user: UserOutput | null = await UserRepository.createUser(payload)
 
   if (_.isEmpty(user)) {
-    return res.status(400).send({
+    res.status(400).send({
       message: 'Something went wrong. Please try again at a later time.',
       data: [],
       code: 400,
     })
   }
-  return res.status(201).send()
+  res.status(201).send()
 }
 
-async function deleteUser(req: Request, res: Response): Promise<HttpResponse> {
+async function deleteUser(req: Request, res: Response) {
   const userId = parseInt(req.params.userId, 10)
 
   const deleted = await UserRepository.deleteUserById(userId)

@@ -1,5 +1,5 @@
-import { Request, Response } from 'express'
-import JWT, { JsonWebTokenError, JwtPayload, VerifyErrors } from 'jsonwebtoken'
+import { Request } from 'express'
+import JWT from 'jsonwebtoken'
 import { JWT_LEEWAY, JWT_SECRET, JWT_EXPIRATION } from '../../config/jwt'
 import { verifyTokenParams, verifyTokenResponse } from '../types/JWT'
 import passport from 'passport'
@@ -8,20 +8,13 @@ import { isEmpty } from 'lodash'
 import UserRepository from '../repositories/UserRepository'
 import UserRole from '../models/UserRole'
 import GroupRole from '../models/GroupRole'
+import moment from 'moment'
 
 export function sign(payload: any) {
   const date = new Date()
-  return JWT.sign(
-    {
-      data: payload || {},
-      iat: Math.floor(Date.now() / 1000) - JWT_LEEWAY,
-      date,
-    },
-    JWT_SECRET,
-    {
-      expiresIn: JWT_EXPIRATION,
-    }
-  )
+  return JWT.sign(payload, JWT_SECRET, {
+    expiresIn: JWT_EXPIRATION,
+  })
 }
 
 export function verifyToken({ token }: verifyTokenParams): verifyTokenResponse {
@@ -38,8 +31,8 @@ passport.use(
   new Strategy(
     { passReqToCallback: true },
     async (req: Request, token: string, done: Function) => {
-      const { decoded } = verifyToken({ token })
-      if (isEmpty(decoded)) return done(null, false)
+      const { decoded = {} } = verifyToken({ token })
+      if (isEmpty(decoded)) done(null, false)
 
       const user = await UserRepository.find(decoded.data.userId, {
         include: [
@@ -54,7 +47,7 @@ passport.use(
         ],
       })
 
-      return done(null, user, { scope: 'all' })
+      done(null, user, { scope: 'all' })
     }
   )
 )

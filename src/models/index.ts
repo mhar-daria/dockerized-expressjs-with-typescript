@@ -2,9 +2,14 @@ import { Dialect, Sequelize } from 'sequelize'
 import dotenv from 'dotenv'
 
 // loadEnv()
-dotenv.config({ path: __dirname + '/../../.env' })
+console.log(process.env.LOAD_ENV)
 
-console.log('Loaded configuration file "' + __dirname + '/../../.env' + '".')
+const envFile = `${__dirname}/../../.env${
+  process.env.LOAD_ENV ? '.' + process.env.LOAD_ENV : ''
+}`
+dotenv.config({ path: envFile })
+
+console.log(`Loaded configuration file "${envFile}".`)
 console.log('Environment "' + process.env.NODE_ENV + '".')
 
 const dbName: string = process.env.POSTGRES_DB || 'express'
